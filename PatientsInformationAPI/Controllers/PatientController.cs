@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PatientsInformationAPI.Models.Domains;
 using PatientsInformationAPI.Repositories.Implementation;
 using PatientsInformationAPI.Repositories.Interface;
 using System.Text.Json;
@@ -42,6 +43,25 @@ namespace PatientsInformationAPI.Controllers
         {
             var Diseases = await diseaseRepository.GetDiseasesAsync();
             return JsonSerializer.Serialize(Diseases);
+        }
+
+        [HttpPost("CreatePaitientInformation")]
+        public async Task<IActionResult> Create(Patient patient)
+        {
+            try
+            {
+                var isSaved = await patientRepository.CreateAsync(patient);
+                if (isSaved==false)
+                {
+                    BadRequest("Can't Save");
+                }
+            }
+            catch(Exception ex)
+            {
+                return BadRequest("Can't Save");
+            }
+
+            return Ok("Saved Successfully");
         }
     }
 }

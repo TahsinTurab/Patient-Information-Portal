@@ -5,7 +5,9 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientsInformationAPI", "PatientsInformationAPI\PatientsInformationAPI.csproj", "{418B3E68-02BA-42A6-895D-11E70A84E076}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientsInformationMVC", "PatientInformationMVC\PatientsInformationMVC.csproj", "{9D12A40E-4E84-468D-8FE0-E9B198830E16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientsInformationMVC", "PatientInformationMVC\PatientsInformationMVC.csproj", "{9D12A40E-4E84-468D-8FE0-E9B198830E16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientInformationAPI.Tests", "PatientInformationAPI.Tests\PatientInformationAPI.Tests.csproj", "{D4AC7290-2F9B-4B3A-AED0-5A1AA6B6C28A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9D12A40E-4E84-468D-8FE0-E9B198830E16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D12A40E-4E84-468D-8FE0-E9B198830E16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D12A40E-4E84-468D-8FE0-E9B198830E16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4AC7290-2F9B-4B3A-AED0-5A1AA6B6C28A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4AC7290-2F9B-4B3A-AED0-5A1AA6B6C28A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4AC7290-2F9B-4B3A-AED0-5A1AA6B6C28A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4AC7290-2F9B-4B3A-AED0-5A1AA6B6C28A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,7 +15,8 @@ namespace PatientsInformationAPI.Controllers
         private readonly IAllergyRepository allergyRepository;
         private readonly IDiseaseRepository diseaseRepository;
 
-        public PatientController(IDiseaseRepository diseaseRepository, IPatientRepository patientRepository, IAllergyRepository allergyRepository, INCDRepository NCDRepository)
+        public PatientController(IPatientRepository patientRepository, IDiseaseRepository diseaseRepository, 
+            IAllergyRepository allergyRepository, INCDRepository NCDRepository)
         {
             this.patientRepository = patientRepository;
             this.NCDRepository = NCDRepository;

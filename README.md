@@ -4,7 +4,7 @@
 <b>Database:<b> MS SQL server 2018 <br>
 
 Configure Connection String: <br>
-After open the solution on your local machine, change the connection as per your ms sql server.
+After open the solution on your local machine, change the connection as per your ms sql server from appsetting.json
 
 Update Datebase:<br>
 From project manager console run the command: Update-Database

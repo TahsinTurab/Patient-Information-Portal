@@ -1,24 +1,26 @@
 # Patient-Information-Portal
-# Front End: ASP.NET Core MVC 6
-# Back End: ASP.NET Core WEB API
-# Database: MS SQL server 2018
+<b>Front End: <b> ASP.NET Core MVC 6 <br>
+<b>Back End:<b> ASP.NET Core WEB API <br>
+<b>Database:<b> MS SQL server 2018 <br>
 
-# Configure Connection String:
+Configure Connection String: <br>
 After open the solution on your local machine, change the connection as per your ms sql server.
 
-# Update Datebase:
+Update Datebase:<br>
 From project manager console run the command: Update-Database
 
-# Run SQL query:
+Run SQL query:<br>
 Run sql query from sql queries folder to insert data in Diseases, NCDs and Allergies table.
 
-# Configure start up project:
+Configure start up project:<br>
 configure both API and MVC project as startup project
 
-then run the application
+then run the application<br>
 
 
-# Unit Testing: Xunit
+Unit Testing: Xunit<br>
 This unit test is done for only the Delete method of API project.
+
+N.B: API for Create, Read, Delete and Update are created in backend project. Hence the given UI is only for Display data and Create; so, MVC project contains only these 2 operations.
 
 

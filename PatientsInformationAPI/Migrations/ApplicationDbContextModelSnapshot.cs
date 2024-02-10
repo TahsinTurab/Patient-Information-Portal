@@ -73,6 +73,10 @@ namespace PatientsInformationAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Disease")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("HasEpilepsy")
                         .HasColumnType("int");
 
@@ -87,43 +91,43 @@ namespace PatientsInformationAPI.Migrations
 
             modelBuilder.Entity("PatientsInformationAPI.Models.RelationshipModel.Allergies_Details", b =>
                 {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("AllergiesID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AllergyID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("PatientID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("AllergiesID", "PatientID");
+                    b.HasKey("ID");
+
+                    b.HasIndex("AllergyID");
 
                     b.HasIndex("PatientID");
 
                     b.ToTable("Allergies_Details");
                 });
 
-            modelBuilder.Entity("PatientsInformationAPI.Models.RelationshipModel.Diseases_Details", b =>
-                {
-                    b.Property<Guid>("DiseaseID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("PatientID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DiseaseID", "PatientID");
-
-                    b.HasIndex("PatientID");
-
-                    b.ToTable("Diseases_Details");
-                });
-
             modelBuilder.Entity("PatientsInformationAPI.Models.RelationshipModel.NCD_Details", b =>
                 {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("NCDID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("PatientID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("NCDID", "PatientID");
+                    b.HasKey("ID");
+
+                    b.HasIndex("NCDID");
 
                     b.HasIndex("PatientID");
 
@@ -132,67 +136,33 @@ namespace PatientsInformationAPI.Migrations
 
             modelBuilder.Entity("PatientsInformationAPI.Models.RelationshipModel.Allergies_Details", b =>
                 {
-                    b.HasOne("PatientsInformationAPI.Models.Domains.Patient", "Patient")
+                    b.HasOne("PatientsInformationAPI.Models.Domains.Allergy", null)
+                        .WithMany("Patients")
+                        .HasForeignKey("AllergyID");
+
+                    b.HasOne("PatientsInformationAPI.Models.Domains.Patient", null)
                         .WithMany("Allergies")
-                        .HasForeignKey("AllergiesID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PatientsInformationAPI.Models.Domains.Allergy", "Allergy")
-                        .WithMany("Patients")
                         .HasForeignKey("PatientID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Allergy");
-
-                    b.Navigation("Patient");
-                });
-
-            modelBuilder.Entity("PatientsInformationAPI.Models.RelationshipModel.Diseases_Details", b =>
-                {
-                    b.HasOne("PatientsInformationAPI.Models.Domains.Patient", "Patient")
-                        .WithMany("Diseases")
-                        .HasForeignKey("DiseaseID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PatientsInformationAPI.Models.Domains.Disease", "Disease")
-                        .WithMany("Patients")
-                        .HasForeignKey("PatientID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Disease");
-
-                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("PatientsInformationAPI.Models.RelationshipModel.NCD_Details", b =>
                 {
-                    b.HasOne("PatientsInformationAPI.Models.Domains.Patient", "Patient")
-                        .WithMany("NCDs")
+                    b.HasOne("PatientsInformationAPI.Models.Domains.NCD", null)
+                        .WithMany("Patients")
                         .HasForeignKey("NCDID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PatientsInformationAPI.Models.Domains.NCD", "NCD")
-                        .WithMany("Patients")
+                    b.HasOne("PatientsInformationAPI.Models.Domains.Patient", null)
+                        .WithMany("NCDs")
                         .HasForeignKey("PatientID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("NCD");
-
-                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("PatientsInformationAPI.Models.Domains.Allergy", b =>
-                {
-                    b.Navigation("Patients");
-                });
-
-            modelBuilder.Entity("PatientsInformationAPI.Models.Domains.Disease", b =>
                 {
                     b.Navigation("Patients");
                 });
@@ -205,8 +175,6 @@ namespace PatientsInformationAPI.Migrations
             modelBuilder.Entity("PatientsInformationAPI.Models.Domains.Patient", b =>
                 {
                     b.Navigation("Allergies");
-
-                    b.Navigation("Diseases");
 
                     b.Navigation("NCDs");
                 });

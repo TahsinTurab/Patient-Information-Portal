@@ -6,15 +6,16 @@ namespace PatientsInformationAPI.Models.Domains
 {
     public class Patient
     {
+
         [Required]
         public Guid ID { get; set; } = Guid.NewGuid();
         [Required]
         public string Name { get; set; }
         [Required]
         public Epilepsy HasEpilepsy { get; set; }
-        [Required]
-        public ICollection<Diseases_Details> Diseases { get; set; }
+        public string Disease { get; set; }
         public ICollection<NCD_Details>? NCDs { get; set; }
         public ICollection<Allergies_Details>? Allergies { get; set; }
+
     }
 }

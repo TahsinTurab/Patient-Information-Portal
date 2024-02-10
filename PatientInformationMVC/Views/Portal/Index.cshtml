@@ -1,0 +1,111 @@
+﻿@using PatientsInformationMVC.Models
+@model PatientViewModel
+
+@{
+    ViewData["Title"] = "Insert Patient Information";
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+@if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+{
+    <div class="alert alert-success" role="alert">
+        @Html.Raw(ViewBag.SuccessMessage)
+    </div>
+}
+
+<form asp-controller="Portal" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="PatientName" class="form-lebel" style="width: 15%;"></label>
+        <input id ="patientName" type="text" asp-for="PatientName" style="width: 80%;" required/>
+        <span asp-validation-for="PatientName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="SelectedDisease" class="form-lebel" style="width: 15%;"></label>
+        <select class="select2" asp-items="Model.DiseasesSelectList" asp-for="SelectedDisease" style="width: 80%; " required>
+        </select>
+        <span asp-validation-for="SelectedDisease" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="SelectedEpilepsy" class="form-lebel" style="width: 15%;"></label>
+        <select class="select2" asp-items="Model.EpilepsySelectList" asp-for="SelectedEpilepsy" style="width: 80%;" required>
+        </select>
+        <span asp-validation-for="SelectedEpilepsy" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <table style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                        <label class="form-lebel">Other NCDs</label>
+                    </td>
+                    <td style="width: 40%;">
+                        <select id="leftListNCDs" asp-items="Model.NCDsSelectList" style="width: 80%;height:200px" multiple>
+                        </select>
+                    </td>
+                    <td style="text-align:center; width: 10%;">
+                        <button type="button" id="moveRightNCDs" style="width: 90px;">Add ></button><br />
+                        <button type="button" id="moveLeftNCDs" style="width: 90px;">< Remove</button>
+                    </td>
+                    <td style="width: 40%; text-align:center;">
+                        <select asp-for = "SelectedNCDs" id="rightListNCDs"  style="width: 80%; height:200px;" multiple>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="mb-3">
+        <table style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                        <label class="form-lebel">Allergies</label>
+                    </td>
+                    <td style="width: 40%;">
+                        <select id="leftListAllergies" asp-items="Model.AllergiesSelectList" style="width: 80%;height:200px" multiple>
+                        </select>
+                    </td>
+                    <td style="text-align:center; width: 10%;">
+                        <button type="button" id="moveRightAllergies" style="width: 90px;">Add ></button><br />
+                        <button type="button" id="moveLeftAllergies" style="width: 90px;">< Remove</button>
+                    </td>
+                    <td style="width: 40%; text-align:center;">
+                        <select asp-for="SelectedAllergies" id="rightListAllergies" style="width: 80%; height:200px;" multiple>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="mb-3" style="text-align:center">
+        <button onclick="submitBtn()" type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#moveRightNCDs').click(function() {
+                $('#leftListNCDs option:selected').appendTo('#rightListNCDs');
+            });
+
+            $('#moveLeftNCDs').click(function() {
+                $('#rightListNCDs option:selected').appendTo('#leftListNCDs');
+            });
+        });
+        $(document).ready(function () {
+            $('#moveRightAllergies').click(function () {
+                $('#leftListAllergies option:selected').appendTo('#rightListAllergies');
+            });
+
+            $('#moveLeftAllergies').click(function () {
+                $('#rightListAllergies option:selected').appendTo('#leftListAllergies');
+            });
+        });
+        
+        function submitBtn(){
+                $('#rightListAllergies option').prop('selected', true);
+                $('#rightListNCDs option').prop('selected', true);
+        };
+    </script>
+}

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PatientsInformationAPI.Data;
 using PatientsInformationAPI.Models.Domains;
+using PatientsInformationAPI.Models.DTOs;
 using PatientsInformationAPI.Repositories.Interface;
 
 namespace PatientsInformationAPI.Repositories.Implementation
@@ -14,9 +15,18 @@ namespace PatientsInformationAPI.Repositories.Implementation
             this.dbContext = dbContext;
         }
 
-        public async Task<IList<Allergy>> GetAllergiesAsync()
+        public async Task<IList<AllergyDto>> GetAllergiesAsync()
         {
-            return await dbContext.Allergies.ToListAsync();
+            var Allergies = await dbContext.Allergies.ToListAsync();
+            var AllergiesDtos = new List<AllergyDto>();
+            foreach(var a in Allergies)
+            {
+                var AllergyDto = new AllergyDto();
+                AllergyDto.ID = a.ID;
+                AllergyDto.Name = a.Name;
+                AllergiesDtos.Add(AllergyDto);
+            }
+            return AllergiesDtos;
         }
     }
 }

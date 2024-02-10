@@ -4,10 +4,9 @@ using PatientsInformationAPI.Models.Domains;
 using PatientsInformationAPI.Repositories.Implementation;
 using PatientsInformationAPI.Repositories.Interface;
 using System.Text.Json;
-
 namespace PatientsInformationAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PatientController : ControllerBase
     {
@@ -62,6 +61,34 @@ namespace PatientsInformationAPI.Controllers
             }
 
             return Ok("Saved Successfully");
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(Patient patient)
+        {
+            var DbItem = await patientRepository.UpdateAsync(patient);
+            if (DbItem != null)
+            {
+                return Ok(DbItem);
+            }
+            else
+            {
+                return BadRequest("Not Found!");
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid id) 
+        {
+            var DbItem = await patientRepository.DeleteAsync(id);
+            if (DbItem != null)
+            {
+                return Ok(DbItem);
+            }
+            else
+            {
+                return BadRequest("Not Found!");
+            }
         }
     }
 }
